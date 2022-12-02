@@ -1,49 +1,43 @@
 file = open("day2_input.txt", "r")
 data = file.read().split("\n")
 
+PLAY_VALUES = {
+    "X": 1,
+    "Y": 2,
+    "Z": 3
+}
+
+MATCH_VALUES = {
+    "AX": 3,
+    "AY": 6,
+    "AZ": 0,
+    "BX": 0,
+    "BY": 3,
+    "BZ": 6,
+    "CX": 6,
+    "CY": 0,
+    "CZ": 3
+}
+
+US_VALUES = {
+    "AX": "Z",
+    "AY": "X",
+    "AZ": "Y",
+    "BX": "X",
+    "BY": "Y",
+    "BZ": "Z",
+    "CX": "Y",
+    "CY": "Z",
+    "CZ": "X"
+}
+
 
 def getPlayValue(p_play):
-    if p_play == 'X':
-        return 1
-    elif p_play == 'Y':
-        return 2
-    elif p_play == 'Z':
-        return 3
-    else:
-        return 0
+    return PLAY_VALUES[p_play]
 
 
 def getWinValue(p_them, p_us):
-    # rock A,X paper B,Y scissors C,Z
-    if p_them == 'A':
-        if p_us == 'X':
-            return 3
-        elif p_us == 'Y':
-            return 6
-        elif p_us == 'Z':
-            return 0
-        else:
-            return 0
-    elif p_them == 'B':
-        if p_us == 'X':
-            return 0
-        elif p_us == 'Y':
-            return 3
-        elif p_us == 'Z':
-            return 6
-        else:
-            return 0
-    elif p_them == 'C':
-        if p_us == 'X':
-            return 6
-        elif p_us == 'Y':
-            return 0
-        elif p_us == 'Z':
-            return 3
-        else:
-            return 0
-    else:
-        return 0
+    return MATCH_VALUES[p_them + p_us]
 
 
 def getScore(p_them, p_us):
@@ -54,36 +48,7 @@ def getScore(p_them, p_us):
 
 
 def getUs(p_them, p_play):
-    # X lose, Y draw, and Z win.
-    if p_them == 'A':
-        if p_play == 'X':
-            return 'Z'
-        elif p_play == 'Y':
-            return 'X'
-        elif p_play == 'Z':
-            return 'Y'
-        else:
-            return -1
-    elif p_them == 'B':
-        if p_play == 'X':
-            return 'X'
-        elif p_play == 'Y':
-            return 'Y'
-        elif p_play == 'Z':
-            return 'Z'
-        else:
-            return -1
-    elif p_them == 'C':
-        if p_play == 'X':
-            return 'Y'
-        elif p_play == 'Y':
-            return 'Z'
-        elif p_play == 'Z':
-            return 'X'
-        else:
-            return -1
-    else:
-        return -1
+    return US_VALUES[p_them + p_play]
 
 
 def getRevisedScore(p_them, p_play):
